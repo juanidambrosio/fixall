@@ -4,4 +4,4 @@ import * as cdk from '@aws-cdk/core';
 import { FixallStack } from '../lib/stacks/fixall-stack';
 
 const app = new cdk.App();
-new FixallStack(app, 'FixallStack');
+new FixallStack(app, 'fixall-stack');
