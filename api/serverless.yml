@@ -9,8 +9,14 @@ provider:
 
 functions:
   getWorkers:
-    handler: lib/functions/workers/getWorkers.handler
+    handler: lib/functions/workers.get
     events:
       - http:
           path: workers
+          method: get
+  getJobs:
+    handler: lib/functions/jobs.get
+    events:
+      - http:
+          path: jobs
           method: get
