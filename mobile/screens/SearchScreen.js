@@ -1,20 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { FlatList } from 'react-native';
+import { CATEGORIES } from '../data/dummy-data';
+import Category from '../components/Category';
 
 const SearchScreen = props => {
+
+    const onPress = cat => {
+        return;
+    };
+
     return (
-        <View style={styles.screen}>
-            <Text>Search Screen!</Text>
-        </View>
+        <FlatList
+            data={CATEGORIES.sort((cat1, cat2) => cat1.title > cat2.title)}
+            renderItem={cat => (
+                <Category
+                    title={cat.item.title}
+                    image={cat.item.image}
+                    onPress={onPress} />
+            )}
+        />
     )
 }
-
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-});
 
 export default SearchScreen;
