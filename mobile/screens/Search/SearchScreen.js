@@ -1,12 +1,17 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { CATEGORIES } from '../data/dummy-data';
-import Category from '../components/Category';
+import { CATEGORIES } from '../../data/dummy-data';
+import Category from '../../components/Category';
 
 const SearchScreen = props => {
 
-    const onPress = cat => {
-        return;
+    const onPress = category => {
+        props.navigation.navigate({
+            routeName: 'WorkerSelection',
+            params: {
+                category
+            }
+        });
     };
 
     return (
@@ -16,7 +21,7 @@ const SearchScreen = props => {
                 <Category
                     title={cat.item.title}
                     image={cat.item.image}
-                    onPress={onPress} />
+                    onPress={() => onPress(cat)} />
             )}
         />
     )

@@ -1,17 +1,34 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
-import SearchScreen from '../screens/SearchScreen';
+import SearchScreen from '../screens/Search/SearchScreen';
+import WorkerSelectionScreen from '../screens/Search/WorkerSelectionScreen';
+import SummarySelectionScreen from '../screens/Search/SummarySelectionScreen';
 import MyServicesOverviewScreen from '../screens/MyServicesOverviewScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+
+const NewOrderNavigator = createStackNavigator({
+    Search: {
+        screen: SearchScreen
+    },
+    WorkerSelection: {
+        screen: WorkerSelectionScreen
+    },
+    SummarySelection: {
+        screen: SummarySelectionScreen
+    }
+}, {
+    initialRouteName: 'Search'
+});
 
 const TabNavigator = createBottomTabNavigator(
     {
         Search: {
-            screen: SearchScreen,
+            screen: NewOrderNavigator,
             navigationOptions: {
                 tabBarIcon: tabInfo => {
                     return (
