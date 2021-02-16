@@ -5,30 +5,37 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
-import SearchScreen from '../screens/Search/SearchScreen';
-import WorkerSelectionScreen from '../screens/Search/WorkerSelectionScreen';
-import SummarySelectionScreen from '../screens/Search/SummarySelectionScreen';
-import MyServicesOverviewScreen from '../screens/MyServicesOverviewScreen';
+import { SearchScreen, WorkerSelectionScreen, SummarySelectionScreen } from '../screens/Search';
+import { MyServicesOverviewScreen, ChatScreen } from '../screens/MyServices';
 import SettingsScreen from '../screens/SettingsScreen';
 
-const NewOrderNavigator = createStackNavigator({
-    Search: {
-        screen: SearchScreen
-    },
-    WorkerSelection: {
-        screen: WorkerSelectionScreen
-    },
-    SummarySelection: {
-        screen: SummarySelectionScreen
-    }
+const NewServiceNavigator = createStackNavigator({
+    Search: SearchScreen,
+    WorkerSelection: WorkerSelectionScreen,
+    SummarySelection: SummarySelectionScreen
 }, {
     initialRouteName: 'Search'
+});
+
+const MyServicesNavigator = createStackNavigator({
+    MyServices: MyServicesOverviewScreen,
+    Chat: {
+        screen: ChatScreen,
+        navigationOptions: {
+            title: 'Chat'
+        }
+    }
+}, {
+    initialRouteName: 'MyServices',
+    defaultNavigationOptions: {
+        title: 'My Services'
+    }
 });
 
 const TabNavigator = createBottomTabNavigator(
     {
         Search: {
-            screen: NewOrderNavigator,
+            screen: NewServiceNavigator,
             navigationOptions: {
                 tabBarIcon: tabInfo => {
                     return (
@@ -42,7 +49,7 @@ const TabNavigator = createBottomTabNavigator(
             }
         },
         MyServices: {
-            screen: MyServicesOverviewScreen,
+            screen: MyServicesNavigator,
             navigationOptions: {
                 tabBarIcon: tabInfo => {
                     return (
@@ -52,8 +59,7 @@ const TabNavigator = createBottomTabNavigator(
                             color={tabInfo.tintColor}
                         />
                     );
-                },
-                title: 'My Services'
+                }
             }
         },
         Settings: {
