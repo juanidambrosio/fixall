@@ -124,5 +124,8 @@ const SERVICES = [
         'Escobar 666',
         '4000-8000'
     ),
-]
-export { CATEGORIES, SERVICES };
+];
+
+const SETTINGS = [{ id: '1', name: 'Notifications', screen: 'Notifications' }, { id: '2', name: 'Offer Services as a Professional', screen: 'ProfessionalRegistration' }];
+
+export { CATEGORIES, SERVICES, SETTINGS };

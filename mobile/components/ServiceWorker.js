@@ -6,15 +6,17 @@ import Card from './UI/Card';
 const ServiceWorker = props => {
     return (
         <Card style={styles.service}>
-            <View style={styles.serviceSummary}>
-                <Text>{props.name}</Text>
-                <Text>{props.category}</Text>
-                <Text>{props.address}</Text>
-                <Text>{props.priceRange}</Text>
+            <View style={styles.serviceLine}>
+                <Text style={styles.serviceItem}>{props.name}</Text>
+                <Text style={styles.serviceItem}>{props.category}</Text>
+            </View>
+            <View style={styles.serviceLine}>
+                <Text style={styles.serviceItem}>{props.address}</Text>
+                <Text style={styles.serviceItem}>{props.priceRange}</Text>
             </View>
             <View style={styles.actions}>
-                    {props.children}
-                </View>
+                {props.children}
+            </View>
         </Card>
     )
 };
@@ -25,17 +27,18 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center'
     },
-    serviceSummary: {
+    serviceLine: {
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
         alignItems: 'center',
-        width: '100%',
-        marginBottom: 15
+        justifyContent: 'space-evenly',
+        width: '100%'
+    },
+    serviceItem: {
+        width: '50%',
+        padding: 5
     },
     actions: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
         paddingHorizontal: 20
     }
 });

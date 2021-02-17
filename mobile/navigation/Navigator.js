@@ -7,7 +7,7 @@ import Colors from '../constants/Colors';
 
 import { SearchScreen, WorkerSelectionScreen, SummarySelectionScreen } from '../screens/Search';
 import { MyServicesOverviewScreen, ChatScreen } from '../screens/MyServices';
-import SettingsScreen from '../screens/SettingsScreen';
+import { MoreScreen, NotificationsScreen, ProfessionalRegistrationScreen } from '../screens/More';
 
 const NewServiceNavigator = createStackNavigator({
     Search: SearchScreen,
@@ -29,6 +29,22 @@ const MyServicesNavigator = createStackNavigator({
     initialRouteName: 'MyServices',
     defaultNavigationOptions: {
         title: 'My Services'
+    }
+});
+
+const MoreNavigator = createStackNavigator({
+    More: MoreScreen,
+    Notifications: {
+        screen: NotificationsScreen,
+        navigationOptions: {
+            title: 'Notifications'
+        }
+    },
+    ProfessionalRegistration: {
+        screen: ProfessionalRegistrationScreen,
+        navigationOptions: {
+            title: 'Offer your Services'
+        }
     }
 });
 
@@ -54,7 +70,7 @@ const TabNavigator = createBottomTabNavigator(
                 tabBarIcon: tabInfo => {
                     return (
                         <Ionicons
-                            name="list"
+                            name="book"
                             size={25}
                             color={tabInfo.tintColor}
                         />
@@ -62,13 +78,13 @@ const TabNavigator = createBottomTabNavigator(
                 }
             }
         },
-        Settings: {
-            screen: SettingsScreen,
+        More: {
+            screen: MoreNavigator,
             navigationOptions: {
                 tabBarIcon: tabInfo => {
                     return (
                         <Ionicons
-                            name="settings"
+                            name="list"
                             size={25}
                             color={tabInfo.tintColor}
                         />
