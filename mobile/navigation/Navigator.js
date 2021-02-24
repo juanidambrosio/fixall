@@ -7,7 +7,7 @@ import Colors from '../constants/Colors';
 
 import { SearchScreen, WorkerSelectionScreen, SummarySelectionScreen } from '../screens/Search';
 import { MyServicesOverviewScreen, ChatScreen } from '../screens/MyServices';
-import { MoreScreen, NotificationsScreen, ProfessionalRegistrationScreen } from '../screens/More';
+import { MoreScreen, NotificationsScreen, ProfessionalRegistrationScreen, SettingsScreen } from '../screens/More';
 
 const NewServiceNavigator = createStackNavigator({
     Search: SearchScreen,
@@ -34,6 +34,12 @@ const MyServicesNavigator = createStackNavigator({
 
 const MoreNavigator = createStackNavigator({
     More: MoreScreen,
+    Settings: {
+        screen: SettingsScreen,
+        navigationOptions: {
+            title: 'Settings'
+        }
+    },
     Notifications: {
         screen: NotificationsScreen,
         navigationOptions: {

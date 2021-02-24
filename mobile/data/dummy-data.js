@@ -126,6 +126,6 @@ const SERVICES = [
     ),
 ];
 
-const SETTINGS = [{ id: '1', name: 'Notifications', screen: 'Notifications' }, { id: '2', name: 'Offer Services as a Professional', screen: 'ProfessionalRegistration' }];
+const SETTINGS = [{ id: '0', name: 'Settings', screen: 'Settings' },{ id: '1', name: 'Notifications', screen: 'Notifications' }, { id: '2', name: 'Offer Services as a Professional', screen: 'ProfessionalRegistration' }];
 
 export { CATEGORIES, SERVICES, SETTINGS };
