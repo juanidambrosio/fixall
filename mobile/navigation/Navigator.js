@@ -12,13 +12,16 @@ import { MoreScreen, NotificationsScreen, ProfessionalRegistrationScreen, Settin
 const NewServiceNavigator = createStackNavigator({
     Search: SearchScreen,
     WorkerSelection: WorkerSelectionScreen,
-    SummarySelection: SummarySelectionScreen
+    SummarySelection: SummarySelectionScreen,
+    Chat: ChatScreen
 }, {
     initialRouteName: 'Search'
 });
 
 const MyServicesNavigator = createStackNavigator({
-    MyServices: MyServicesOverviewScreen,
+    MyServices: {
+        screen: MyServicesOverviewScreen
+    },
     Chat: {
         screen: ChatScreen,
         navigationOptions: {
@@ -81,7 +84,8 @@ const TabNavigator = createBottomTabNavigator(
                             color={tabInfo.tintColor}
                         />
                     );
-                }
+                },
+                tabBarLabel: 'My Services'
             }
         },
         More: {

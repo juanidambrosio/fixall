@@ -1,4 +1,4 @@
 import Category from './Category';
-import ServiceWorker from './ServiceWorker';
+import Worker from './Worker';
 
-export { Category, ServiceWorker };
+export { Category, Worker };

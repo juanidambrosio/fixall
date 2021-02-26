@@ -3,7 +3,7 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import Card from './UI/Card';
 
-const ServiceWorker = props => {
+const Worker = props => {
     return (
         <Card style={styles.service}>
             <View style={styles.serviceLine}>
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default ServiceWorker;
+export default Worker;

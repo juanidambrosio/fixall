@@ -1,4 +1,4 @@
-import { Category, ServiceWorker } from '../models';
+import { Category, Worker } from '../models';
 
 const CATEGORIES = [
     new Category(
@@ -53,79 +53,131 @@ const CATEGORIES = [
     )
 ];
 
-const SERVICES = [
-    new ServiceWorker(
+const WORKERS = [
+    new Worker(
         '1',
-        'Gas',
+        [
+            new Category(
+                '1',
+                'Gas'
+            )
+        ],
         'Juan',
         'Avellaneda 123',
         '2000-5000'
     ),
-    new ServiceWorker(
+    new Worker(
         '2',
-        'Electricity',
+        [
+            new Category(
+                '2',
+                'Electricity'
+            )
+        ],
         'Pedro',
         'Goyena 234',
         '3000-5000'
     ),
-    new ServiceWorker(
+    new Worker(
         '3',
-        'Air Conditioner',
+        [
+            new Category(
+                '3',
+                'Air Conditioner'
+            )
+        ],
         'Marcelo',
         'Cangallo 1230',
         '2000-7000'
     ),
-    new ServiceWorker(
+    new Worker(
         '4',
-        'Carpenter',
+        [
+            new Category(
+                '4',
+                'Carpenter'
+            )
+        ],
         'Damian',
         'Pueyrredon 304',
         '1000-1500'
     ),
-    new ServiceWorker(
+    new Worker(
         '5',
-        'Car Wash',
-        'Carlos',
-        'Cantilo 20',
-        '2000-2800'
+        [
+            new Category(
+                '5',
+                'Car Wash'
+            )
+        ],
+    'Carlos',
+    'Cantilo 20',
+    '2000-2800'
     ),
-    new ServiceWorker(
-        '6',
-        'Gardener',
-        'Roberto',
-        'Rojas 3035',
-        '3400-5000'
-    ),
-    new ServiceWorker(
+new Worker(
+    '6',
+    [
+        new Category(
+            '6',
+            'Gardener'
+        )
+    ],
+    'Roberto',
+    'Rojas 3035',
+    '3400-5000'
+),
+    new Worker(
         '7',
-        'Moving',
+        [
+            new Category(
+                '7',
+                'Moving'
+            )
+        ],
         'Matias',
         'Mitre 504',
         '1400-10000'
     ),
-    new ServiceWorker(
+    new Worker(
         '8',
-        'Paint',
+        [
+            new Category(
+                '8',
+                'Paint'
+            )
+        ],
         'Walter',
         'Marcelo T. de Alvear 1945',
         '1000-6000'
     ),
-    new ServiceWorker(
+    new Worker(
         '9',
-        'Pet Care',
+        [
+            new Category(
+                '9',
+                'Pet Care'
+            )
+        ],
         'Tomas',
         'Alsina 983',
         '1500-3000'
     ),
-    new ServiceWorker(
+    new Worker(
         '10',
-        'Pool',
+        [
+            new Category(
+                '10',
+                'Pool'
+            )
+        ],
         'Facundo',
         'Escobar 666',
         '4000-8000'
     ),
 ];
 
-const SETTINGS = [{ id: '0', name: 'Settings', screen: 'Settings' },{ id: '1', name: 'Notifications', screen: 'Notifications' }, { id: '2', name: 'Offer Services as a Professional', screen: 'ProfessionalRegistration' }];
+const SETTINGS = [{ id: '0', name: 'Settings', screen: 'Settings' }, { id: '1', name: 'Notifications', screen: 'Notifications' }, { id: '2', name: 'Offer Services as a Professional', screen: 'ProfessionalRegistration' }];
 
-export { CATEGORIES, SERVICES, SETTINGS };
+const SERVICES = [];
+
+export { CATEGORIES, WORKERS, SETTINGS, SERVICES };
