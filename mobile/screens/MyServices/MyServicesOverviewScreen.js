@@ -1,10 +1,36 @@
-import React from 'react';
-import { FlatList, Button, StyleSheet, View, Text } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { FlatList, Button, StyleSheet, View, Text, ActivityIndicator } from 'react-native';
 import Worker from '../../components/Worker';
-import { SERVICES } from '../../data/dummy-data';
 import Colors from '../../constants/Colors';
+import { useSelector, useDispatch } from 'react-redux';
+import { getServices } from '../../store/actions/services';
 
 const MyServicesOverviewScreen = props => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [isRefreshing, setIsRefreshing] = useState(false);
+    const [error, setError] = useState();
+
+    const services = useSelector(state => state.services.services);
+
+    const dispatch = useDispatch();
+
+    const fetchServices = useCallback(async () => {
+        setError(null);
+        setIsRefreshing(true);
+        try {
+            await dispatch(getServices());
+        } catch (err) {
+            setError(err.message);
+        }
+        setIsRefreshing(false);
+    }, [dispatch, setIsRefreshing, setError]);
+
+    useEffect(() => {
+        setIsLoading(true);
+        fetchServices().then(() => {
+            setIsLoading(false);
+        });
+    }, [fetchServices, setIsLoading]);
 
     const chatHandler = id => {
         props.navigation.navigate('Chat', {
@@ -16,10 +42,32 @@ const MyServicesOverviewScreen = props => {
         // Delete reducer
         return;
     };
-    console.log(SERVICES);
-    return SERVICES.length > 0 ? (
+
+    if (error) {
+        console.log(error);
+        return (
+            <View style={styles.screen}>
+                <Text>An error occurred!</Text>
+                <Button
+                    title="Try again"
+                    onPress={fetchServices}
+                    color={Colors.primary}
+                />
+            </View>
+        );
+    }
+
+    if (isLoading) {
+        return (
+            <View style={styles.screen}>
+                <ActivityIndicator size="large" color={Colors.primary} />
+            </View>
+        );
+    }
+
+    return services.length > 0 ? (
         <FlatList
-            data={SERVICES.sort((ser1, ser2) => ser1.category.name > ser2.category.name)}
+            data={services.sort((ser1, ser2) => ser1.category.name > ser2.category.name)}
             renderItem={service =>
             (
                 <Worker
@@ -37,7 +85,8 @@ const MyServicesOverviewScreen = props => {
                         onPress={() => cancelHandler(service.item.worker.id)} />
                 </Worker>
             )}
-            extraData={SERVICES}>
+            onRefresh={fetchServices}
+            refreshing={isRefreshing}>
         </FlatList>
     ) : (
             <View style={styles.screen}>
@@ -52,5 +101,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     }
-})
+});
+
 export default MyServicesOverviewScreen;

@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const ChatScreen = props => {
 const workerId = props.navigation.getParam('workerId');
     return (
-        <View styles={styles.screen}>
+        <View style={styles.screen}>
             <Text>This is the chat screen with worker {workerId}!</Text>
         </View>
     );
