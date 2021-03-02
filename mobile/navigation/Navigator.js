@@ -1,7 +1,7 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createStackNavigator, HeaderBackButton } from 'react-navigation-stack';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
@@ -13,7 +13,15 @@ const NewServiceNavigator = createStackNavigator({
     Search: SearchScreen,
     WorkerSelection: WorkerSelectionScreen,
     SummarySelection: SummarySelectionScreen,
-    Chat: ChatScreen
+    Chat: {
+        screen: ChatScreen,
+        navigationOptions: ({ navigation }) => {
+            return {
+                title: 'Chat',
+                headerLeft: () => <HeaderBackButton label='My Services' onPress={() => { navigation.popToTop(); navigation.navigate('MyServices') }} />
+            }
+        }
+    }
 }, {
     initialRouteName: 'Search'
 });
@@ -23,10 +31,7 @@ const MyServicesNavigator = createStackNavigator({
         screen: MyServicesOverviewScreen
     },
     Chat: {
-        screen: ChatScreen,
-        navigationOptions: {
-            title: 'Chat'
-        }
+        screen: ChatScreen
     }
 }, {
     initialRouteName: 'MyServices',
@@ -61,31 +66,39 @@ const TabNavigator = createBottomTabNavigator(
     {
         Search: {
             screen: NewServiceNavigator,
-            navigationOptions: {
-                tabBarIcon: tabInfo => {
-                    return (
-                        <Ionicons
-                            name="search"
-                            size={25}
-                            color={tabInfo.tintColor}
-                        />
-                    );
+            navigationOptions: ({ navigation }) => {
+                const routeName = navigation.state.routes[navigation.state.index].routeName;
+                return {
+                    tabBarIcon: tabInfo => {
+                        return (
+                            <Ionicons
+                                name="search"
+                                size={25}
+                                color={tabInfo.tintColor}
+                            />
+                        );
+                    },
+                    tabBarVisible: routeName !== 'Chat'
                 }
             }
         },
         MyServices: {
             screen: MyServicesNavigator,
-            navigationOptions: {
-                tabBarIcon: tabInfo => {
-                    return (
-                        <Ionicons
-                            name="book"
-                            size={25}
-                            color={tabInfo.tintColor}
-                        />
-                    );
-                },
-                tabBarLabel: 'My Services'
+            navigationOptions: ({ navigation }) => {
+                const routeName = navigation.state.routes[navigation.state.index].routeName;
+                return {
+                    tabBarIcon: tabInfo => {
+                        return (
+                            <Ionicons
+                                name="book"
+                                size={25}
+                                color={tabInfo.tintColor}
+                            />
+                        );
+                    },
+                    tabBarLabel: 'My Services',
+                    tabBarVisible: routeName !== 'Chat'
+                }
             }
         },
         More: {
