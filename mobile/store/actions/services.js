@@ -38,7 +38,7 @@ export const getServices = () => {
         const services = Object.keys(fetchedServices).map(key => fetchedServices[key]);
         dispatch(
             {
-                type: GET_SERVICES, services: services
+                type: GET_SERVICES, services
             });
     }
 }

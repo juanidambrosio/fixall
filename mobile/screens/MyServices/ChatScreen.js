@@ -1,27 +1,20 @@
-import React, { useState, useCallback, useEffect } from 'react';    
+import React, { useCallback, useEffect } from 'react';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { useSelector, useDispatch } from 'react-redux';
+import { addMessages, getMessages } from '../../store/actions/messages';
 
 const ChatScreen = props => {
-    const [messages, setMessages] = useState([]);
+    const dispatch = useDispatch();
+    const messages = useSelector(state => state.messages.messages);
 
     useEffect(() => {
-        setMessages([
-            {
-                _id: 1,
-                text: 'Hello developer',
-                createdAt: new Date(),
-                user: {
-                    _id: 2,
-                    name: 'React Native',
-                    avatar: 'https://placeimg.com/140/140/any',
-                },
-            },
-        ])
-    }, [])
+        dispatch(getMessages());
+    }, [dispatch])
 
-    const onSend = useCallback((messages = []) => {
-        setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
-    }, [])
+    const onSend = useCallback((newMessages = []) => {
+        GiftedChat.append(messages, newMessages);
+        dispatch(addMessages(newMessages));
+    }, [dispatch])
 
     return (
         <GiftedChat
@@ -30,6 +23,7 @@ const ChatScreen = props => {
             user={{
                 _id: 1,
             }}
+            inverted={false}
         />
     )
 }

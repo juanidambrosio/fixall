@@ -1,3 +1,4 @@
 import servicesReducer from './services';
+import messagesReducer from './messages';
 
-export { servicesReducer };
+export { servicesReducer, messagesReducer };
